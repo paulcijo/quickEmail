@@ -1,21 +1,14 @@
-from dotenv import load_dotenv
-from emailer import EmailMessage, Emailer
+from tasks import send_email
+
+from emailer import EmailMessage
 
 class App:
-
 	def start(self):
-		load_dotenv()
+		send_email.delay(recipient = "pl.cijo@gmail.com",
+			to = "pl.cijo@gmail.com",
+			body = "Hey there",
+			subject = "Checking this from my machine")
 
 
-	def send_email(self, to: str ="", recipient_email: str = "", subject: str = "", message: str = ""):
-		email = EmailMessage(fromVal=recipient_email, to=to, body=message, subject = subject)
-		emailer = Emailer(email)
-		emailer.send_email()
-
-
-if __name__ == '__main__':
-	app = App()
-
-	app.start()
-	app.send_email(to="pl.cijo@gmail.com", recipient_email="pl.cijo@gmail.com", 
-		subject = "From CIJO", message="Hello from the script")
+if __name__ == "__main__":
+	App().start()

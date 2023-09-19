@@ -4,16 +4,13 @@ import smtplib
 
 class SMTP:
 
-	server = None
-
 	@abstractmethod
 	def get_server():
-		if not SMTP.server:
-			SMTP.server = smtplib.SMTP(os.getenv("SMTP_HOST"), os.getenv("SMTP_PORT"))
-			SMTP.server.starttls()
-			SMTP.server.login(os.getenv("SMTP_USERNAME"), os.getenv("SMTP_PASSWORD"))
-		return SMTP.server
+		server = smtplib.SMTP(os.getenv("SMTP_HOST"), os.getenv("SMTP_PORT"))
+		server.starttls()
+		server.login(os.getenv("SMTP_USERNAME"), os.getenv("SMTP_PASSWORD"))
+		return server
 
-	def __del__(self):
-		if SMTP.server:
-			SMTP.server.quit()
+	@abstractmethod
+	def close(server):
+		server.quit()
