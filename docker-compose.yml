@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+
+  mysql:
+    image: mysql:8
+    container_name: mysql_quick_email
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: quick_email
+      MYSQL_USER: quick_email
+      MYSQL_PASSWORD: quick_email
+    ports:
+      - 3364:3306
+    volumes:
+      - mysql:/var/lib/mysql
+    restart: always
+
+volumes:
+  mysql:

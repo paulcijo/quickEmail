@@ -1,2 +1,5 @@
 celery
 python-dotenv
+flask
+mysql-connector-python
+google-cloud-storage

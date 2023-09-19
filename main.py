@@ -1,14 +1,14 @@
-from tasks import send_email
+from flask import Flask, jsonify
+import data_uploader
 
-from emailer import EmailMessage
+app = Flask(__name__)
 
-class App:
-	def start(self):
-		send_email.delay(recipient = "pl.cijo@gmail.com",
-			to = "pl.cijo@gmail.com",
-			body = "Hey there",
-			subject = "Checking this from my machine")
+@app.route('/process-file', methods=['POST'])
+def processFile():
+	list_id = 1 
+	csv_file_path = 'list.csv'
+	data_uploader.read_and_upload_csv.apply_async(args=(list_id, csv_file_path))
+	return jsonify({'message': 'We have received your message and we will process it soon.'})
 
-
-if __name__ == "__main__":
-	App().start()
+if __name__ == '__main__':
+    app.run(debug=True)

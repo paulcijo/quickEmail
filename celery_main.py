@@ -6,7 +6,7 @@ load_dotenv()
 app = Celery('celery_main',
              broker='amqp://',
              backend='rpc://',
-             include=['tasks'])
+             include=['tasks', 'data_uploader'])
 
 # Optional configuration, see the application user guide.
 app.conf.update(
