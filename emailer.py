@@ -31,7 +31,5 @@ class Emailer:
 
 
 	def send_email(self) -> bool:
-		print(self._email.to)
-		print(self._email.recipient)
 		self._smtp_server.sendmail(self._email.recipient, self._email.to, self._email.get_message())
 		return true

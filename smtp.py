@@ -9,7 +9,6 @@ class SMTP:
 	@abstractmethod
 	def get_server():
 		if not SMTP.server:
-			print(os.getenv("SMTP_PASSWORD"))
 			SMTP.server = smtplib.SMTP(os.getenv("SMTP_HOST"), os.getenv("SMTP_PORT"))
 			SMTP.server.starttls()
 			SMTP.server.login(os.getenv("SMTP_USERNAME"), os.getenv("SMTP_PASSWORD"))
